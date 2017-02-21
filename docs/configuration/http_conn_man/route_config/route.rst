@@ -25,7 +25,8 @@ next (e.g., redirect, forward, rewrite, etc.).
     "shadow": "{...}",
     "priority": "...",
     "headers": [],
-    "rate_limits": []
+    "rate_limits": [],
+    "opaque_config": []
   }
 
 prefix
@@ -127,6 +128,9 @@ priority
 
 :ref:`headers <config_http_conn_man_route_table_route_headers>`
   *(optional, array)* Specifies a set of headers that the route should match on.
+
+:ref:`opaque_config <config_http_conn_man_route_table_opaque_config>`
+  *(optional, array)* Specifies a set of optional route configuration values that can be accessed by filters.
 
 .. _config_http_conn_man_route_table_route_rate_limits:
 
@@ -300,3 +304,24 @@ runtime_key_prefix
 
   **Note:** If the sum of runtime weights exceed 100, the traffic splitting behavior
   is undefined (although the request will be routed to one of the clusters).
+
+.. _config_http_conn_man_route_table_opaque_config:
+
+Opaque Config
+-------------
+
+Additional configuration can be provided to filters through the "Opaque Config" mechanism.  A
+list of Key/Value pairs are specified in the route config.  The configuration is uninterpreted
+by envoy and can be accessed within a user-defined filter.
+
+.. code-block:: json
+
+  [
+    {"name": "...", "value": "..."}
+  ]
+
+name
+  *(required, string)* A user defined configuration name
+
+value
+  *(required, string)* A user defined configuration value

@@ -536,7 +536,19 @@ const std::string Json::Schema::ROUTE_ENTRY_CONFIGURATION_SCHEMA(R"EOF(
         }
       },
       "rate_limits" : {"type" : "array"},
-      "opaque_config" : {"type" : "any"}
+      "opaque_config" : {                                                                                               
+          "type" : "array",                                                                                               
+          "minItems": 1,
+          "items" : {                                                                                                     
+            "type" : "object",                                                                                            
+            "properties" : {                                                                                              
+              "name" : {"type" : "string"},                                                                                
+              "value" : {"type" : "string"}                                                                               
+            },                                                                                                            
+            "required" : ["name", "value"],                                                                                
+            "additionalProperties": false                                                                                 
+          }                                                                                                               
+      }
     },
     "additionalProperties" : false
   }
